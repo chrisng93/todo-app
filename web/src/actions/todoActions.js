@@ -45,3 +45,9 @@ export const addTodo = (payload) => {
 
   }
 };
+
+export const completeTodo = (payload) => {
+  return (dispatch) => {
+
+  }
+};

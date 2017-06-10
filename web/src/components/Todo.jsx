@@ -1,15 +1,16 @@
 import React, { PropTypes as T } from 'react';
 
 const propTypes = {
-  id: T.string.isRequired,
-  description: T.string.isRequired,
+  todo: T.object.isRequired,
+
+  completeTodo: T.func,
 };
 
-export default function Todo({ id, description }) {
+export default function Todo({ todo }) {
   return (
     <div className="todo">
-      <input type="checkbox" onClick={() => this.onCompleteTodo(id)} />
-      <span className="todo-description">{description}</span>
+      <input type="checkbox" onClick={() => this.onCompleteTodo(todo.id)} />
+      <span className="todo-description">{todo.description}</span>
     </div>
   );
 }

@@ -7,6 +7,8 @@ import Todo from './Todo';
 
 const propTypes = {
   currentTodoList: T.object.isRequired,
+
+  completeTodo: T.func,
 };
 
 class TodoList extends Component {
@@ -16,14 +18,21 @@ class TodoList extends Component {
   }
 
   onCompleteTodo(todoId) {
-
+    const { completeTodo } = this.props;
+    completeTodo({ id: todoId });
   }
 
   render() {
     const { currentTodoList } = this.props;
     return (
       <div className="todolist">
-        {currentTodoList.todos.map(todo => <Todo key={todo.id} {...todo, completeTodo: this.onCompleteTodo} />)}
+        {currentTodoList.todos.map(todo =>
+          <Todo
+            key={todo.id}
+            todo={todo}
+            completeTodo={this.onCompleteTodo}
+          />
+        )}
       </div>
     );
   }
@@ -37,7 +46,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    completeTodo: bindActionCreators(actions.completeTodo, dispatch),
   };
 };
 

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Simple todo application web frontend",
   "scripts": {
-    "build": "webpack -p --config webpack.config.babel.js --progress --profile --colors",
+    "build": "webpack -p --config webpack.config.js --progress --profile --colors",
     "start": "webpack-dev-server --progress --profile --colors"
   },
   "author": "Chris Ng",
