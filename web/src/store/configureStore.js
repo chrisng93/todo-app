@@ -6,7 +6,6 @@ import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { autoRehydrate } from 'redux-persist';
 import { browserHistory } from 'react-router';
-import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers/index';
 
 const logger = createLogger({
@@ -14,9 +13,8 @@ const logger = createLogger({
   duration: true,
   diff: true,
 });
-const router = routerMiddleware(browserHistory);
 
-const createStoreWithMiddleware = compose(applyMiddleware(thunk, router, logger), autoRehydrate())(createStore);
+const createStoreWithMiddleware = compose(applyMiddleware(thunk, logger), autoRehydrate())(createStore);
 
 export default function configureStore(initialState) {
   return createStoreWithMiddleware(rootReducer, initialState);
