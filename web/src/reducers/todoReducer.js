@@ -6,8 +6,8 @@ const initialError = {
 };
 
 const todoLists = {
-  test1: {name: 'test1', todos: []},
-  test2: {name: 'test2', todos: []},
+  test1: {id: 1, name: 'test1', todos: []},
+  test2: {id: 2, name: 'test2', todos: []},
 };
 
 const initialState = {
@@ -27,6 +27,19 @@ export default function todoReducer(state = initialState, action) {
       return state;
     case actionTypes.CREATE_TODO_LIST_FAILURE:
       return state;
+
+    case actionTypes.DELETE_TODO_LIST_PENDING:
+      return state;
+    case actionTypes.DELETE_TODO_LIST_SUCCESS:
+      return state;
+    case actionTypes.DELETE_TODO_LIST_FAILURE:
+      return state;
+
+    case actionTypes.SELECT_TODO_LIST:
+      return {
+        ...state,
+        currentTodoList: state.todoLists[payload.id],
+      };
 
     case actionTypes.ADD_TODO_PENDING:
       return state;

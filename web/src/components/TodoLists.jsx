@@ -5,52 +5,73 @@ import * as actions from '../actions';
 import { todoListsSelector } from '../selectors/todoSelectors';
 
 const propTypes = {
+  todoLists: T.object.isRequired,
 
+  createTodoList: T.func,
+  deleteTodoList: T.func,
+  selectTodoList: T.func,
 };
 
 class TodoLists extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      addListName: '',
+      newList: '',
+      selectedTodoList: props.todoLists[Object.keys(props.todoLists)[0]].id,
     };
     this.selectTodoList = this.selectTodoList.bind(this);
-    this.deleteTodoList = this.deleteTodoList.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
+    this.onCreateTodoList = this.onCreateTodoList.bind(this);
   }
 
-  selectTodoList() {
-
+  selectTodoList(id) {
+    this.props.selectTodoList(id);
+    this.setState({ selectedTodoList: id });
   }
 
-  deleteTodoList() {
-
+  onDeleteTodoList(e, todoListId) {
+    e.preventDefault();
+    this.props.deleteTodoList(todoListId);
   }
 
   onChangeInput(name) {
-    this.setState({ addListName: name });
+    this.setState({ newList: name });
+  }
+
+  onCreateTodoList(e) {
+    e.preventDefault();
+    this.props.createTodoList(this.state.newList);
   }
 
   render() {
-    const { todoLists } = this.props;
-    const { addListName } = this.state;
+    const { todoLists, deleteTodoList } = this.props;
+    const { newList, selectedTodoList } = this.state;
     return(
       <div className="todolists">
         <div className="todolists-lists">
           {todoLists.map(todoList =>
-            <span key={todoList.name} className="todolists-lists-list">
-              <span className="todolists-lists-list-name" onClick={this.selectTodoList}>
+            <span
+              key={todoList.id}
+              className={`todolists-lists-list ${selectedTodoList === todoList.id ? 'selected' : null}`}
+            >
+              <span
+                className="todolists-lists-list-name"
+                onClick={() => this.selectTodoList(todoList.id)}
+              >
                 {todoList.name}
               </span>
-              <button className="todolists-lists-list-delete" onClick={this.deleteTodoList}>
+              <button
+                className="todolists-lists-list-delete"
+                onClick={(e) => this.onDeleteTodoList(e, todoList.id)}
+              >
                 x
               </button>
             </span>
           )}
         </div>
         <form className="todolists-add">
-          <input value={addListName} onChange={(e) => this.onChangeInput(e.target.value)} />
-          <button>Create todo list</button>
+          <input value={newList} onChange={(e) => this.onChangeInput(e.target.value)} />
+          <button onClick={(e) => this.onCreateTodoList(e)}>Create todo list</button>
         </form>
       </div>
     );
@@ -65,7 +86,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    createTodoList: bindActionCreators(actions.createTodoList, dispatch),
+    deleteTodoList: bindActionCreators(actions.deleteTodoList, dispatch),
+    selectTodoList: bindActionCreators(actions.selectTodoList, dispatch),
   };
 };
 
