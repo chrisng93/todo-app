@@ -5,9 +5,14 @@ const initialError = {
   message: '',
 };
 
+const todoLists = {
+  test1: {name: 'test1', todos: []},
+  test2: {name: 'test2', todos: []},
+}
+
 const initialState = {
-  todoLists: {}, // object of todo lists w/ key being the list name
-  currentTodoList: [], // current/selected todo list w/ each index being a todo
+  todoLists: todoLists, // object of todo lists w/ key being the list name
+  currentTodoList: {}, // current/selected todo list w/ name and todos keys
   isAddingTodo: false, // is in the middle of an API call to add todo
   error: initialError, // error state
 };

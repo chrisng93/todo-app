@@ -4,8 +4,8 @@ const todoStateSelector = state => state.todo;
 
 export const todoListsSelector = createSelector(
   todoStateSelector,
-  todoState => todoState.todoLists
-) ;
+  todoState => Object.keys(todoState.todoLists).map(key => todoState.todoLists[key])
+);
 
 export const currentTodoListSelector = createSelector(
   todoStateSelector,
