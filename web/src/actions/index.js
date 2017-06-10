@@ -1,8 +1,9 @@
 /**
  * All action names should be defined here
  */
-import { addTodo } from './todoActions';
+import { createTodoList, addTodo } from './todoActions';
 
 module.exports = {
+  createTodoList,
   addTodo,
 };
