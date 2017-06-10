@@ -13,7 +13,7 @@ class Todo extends Component {
   }
 
   render() {
-    return(
+    return (
       <form className="addtodos">
         <input placeholder="What needs to be done?" />
         <button>Add Todo</button>

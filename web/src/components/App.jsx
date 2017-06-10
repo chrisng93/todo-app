@@ -15,8 +15,12 @@ class App extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    // TODO: fetch all of todo lists
+  }
+
   render() {
-    return(
+    return (
       <div id="app">
         <h1>Todos</h1>
         <TodoLists />

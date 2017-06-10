@@ -13,7 +13,7 @@ class TodoList extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="todolist">
         Todo List
       </div>

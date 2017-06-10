@@ -25,13 +25,15 @@ class TodoLists extends Component {
   }
 
   selectTodoList(id) {
-    this.props.selectTodoList(id);
+    const { selectTodoList } = this.props;
+    selectTodoList(id);
     this.setState({ selectedTodoList: id });
   }
 
   onDeleteTodoList(e, todoListId) {
+    const { deleteTodoList } = this.props;
     e.preventDefault();
-    this.props.deleteTodoList(todoListId);
+    deleteTodoList({ id: todoListId });
   }
 
   onChangeInput(name) {
@@ -39,14 +41,16 @@ class TodoLists extends Component {
   }
 
   onCreateTodoList(e) {
+    const { createTodoList } = this.props;
+    const { newList } = this.state;
     e.preventDefault();
-    this.props.createTodoList(this.state.newList);
+    createTodoList({ name: newList });
   }
 
   render() {
-    const { todoLists, deleteTodoList } = this.props;
+    const { todoLists } = this.props;
     const { newList, selectedTodoList } = this.state;
-    return(
+    return (
       <div className="todolists">
         <div className="todolists-lists">
           {todoLists.map(todoList =>
