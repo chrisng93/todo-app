@@ -5,15 +5,22 @@ const initialError = {
   message: '',
 };
 
-const todoLists = {
+const todoListsMock = {
   test1: {id: 1, name: 'test1', todos: []},
   test2: {id: 2, name: 'test2', todos: []},
 };
 
+const currentTodoMock = {
+  id: 1,
+  name: 'test1',
+  todos: [],
+};
+
 const initialState = {
-  todoLists: todoLists, // object of todo lists w/ key being the list name
-  currentTodoList: {}, // current/selected todo list w/ name and todos keys
+  todoLists: todoListsMock, // object of todo lists w/ key being the list name
+  currentTodoList: currentTodoMock, // current/selected todo list w/ name and todos keys
   isCreatingTodoList: false, // is in the middle of an API call to create todo list
+  isDeletingTodoList: false, // is in the middle of an API call to delete todo list
   isAddingTodo: false, // is in the middle of an API call to add todo
   error: initialError, // error state
 };

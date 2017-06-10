@@ -1,37 +1,17 @@
-import React, { Component, PropTypes as T } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import * as actions from '../actions';
+import React, { PropTypes as T } from 'react';
 
 const propTypes = {
-
+  id: T.string.isRequired,
+  description: T.string.isRequired,
 };
 
-class Todo extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <form className="addtodos">
-        <input placeholder="What needs to be done?" />
-        <button>Add Todo</button>
-      </form>
-    );
-  }
+export default function Todo({ id, description }) {
+  return (
+    <div className="todo">
+      <input type="checkbox" onClick={() => this.onCompleteTodo(id)} />
+      <span className="todo-description">{description}</span>
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addTodo: bindActionCreators(actions.addTodo, dispatch),
-  };
-};
-
 Todo.propTypes = propTypes;
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todo);

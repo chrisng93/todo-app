@@ -12,6 +12,16 @@ export const currentTodoListSelector = createSelector(
   todoState => todoState.currentTodoList
 );
 
+export const isCreatingTodoListSelector = createSelector(
+  todoStateSelector,
+  todoState => todoState.isCreatingTodoList
+);
+
+export const isDeletingTodoListSelector = createSelector(
+  todoStateSelector,
+  todoState => todoState.isDeletingTodoList
+);
+
 export const isAddingTodoSelector = createSelector(
   todoStateSelector,
   todoState => todoState.isAddingTodo
