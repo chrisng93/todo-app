@@ -28,6 +28,11 @@ export const currentRemainingSelector = createSelector(
   }
 );
 
+export const isGettingTodoListsSelector = createSelector(
+  todoStateSelector,
+  todoState => todoState.isGettingTodoLists
+);
+
 export const isCreatingTodoListSelector = createSelector(
   todoStateSelector,
   todoState => todoState.isCreatingTodoList

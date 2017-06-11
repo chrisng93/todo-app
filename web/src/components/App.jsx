@@ -8,7 +8,7 @@ import TodoList from './TodoList';
 import Footer from './Footer';
 
 const propTypes = {
-
+  getTodoLists: T.func,
 };
 
 class App extends Component {
@@ -17,7 +17,8 @@ class App extends Component {
   }
 
   componentWillMount() {
-    // TODO: fetch all of todo lists
+    const { getTodoLists } = this.props;
+    getTodoLists();
   }
 
   render() {
@@ -40,7 +41,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getTodoLists: bindActionCreators(actions.getTodoLists, dispatch),
+  };
 };
 
 App.propTypes = propTypes;

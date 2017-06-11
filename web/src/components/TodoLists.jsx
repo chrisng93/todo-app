@@ -44,8 +44,10 @@ class TodoLists extends Component {
     const { createTodoList } = this.props;
     const { newList } = this.state;
     e.preventDefault();
-    createTodoList({ name: newList });
-    this.setState({ newList: '' });
+    if (newList) {
+      createTodoList({ name: newList });
+      this.setState({ newList: '' });
+    }
   }
 
   render() {

@@ -8,6 +8,7 @@ const initialError = {
 const initialState = {
   todoLists: {}, // object of todo lists w/ key being the list name
   currentTodoList: {}, // current/selected todo list w/ name and todos keys
+  isGettingTodoLists: false, // is in the middle of an API call to get all todo lists
   isCreatingTodoList: false, // is in the middle of an API call to create todo list
   isDeletingTodoList: false, // is in the middle of an API call to delete todo list
   isAddingTodo: false, // is in the middle of an API call to add todo
@@ -21,6 +22,29 @@ export default function todoReducer(state = initialState, action) {
   let todoLists = { ...state.todoLists };
   let currentTodoList = { ...state.currentTodoList };
   switch (type) {
+    case actionTypes.GET_TODO_LISTS_PENDING:
+      return {
+        ...state,
+        isGettingTodoLists: true,
+      };
+    case actionTypes.GET_TODO_LISTS_SUCCESS:
+      const lists = {};
+      for (let i = 0; i < payload.lists.length; i++) {
+        lists[payload.lists[i].id] = payload.lists[i]
+      }
+      return {
+        ...state,
+        todoLists: lists,
+        isGettingTodoLists: false,
+        error: initialError,
+      };
+    case actionTypes.GET_TODO_LISTS_FAILURE:
+      return {
+        ...state,
+        isGettingTodoLists: false,
+        error: { status: true, message: payload.error },
+      };
+
     case actionTypes.CREATE_TODO_LIST_PENDING:
       return {
         ...state,

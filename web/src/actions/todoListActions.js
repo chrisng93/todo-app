@@ -1,6 +1,26 @@
 import * as actionTypes from '../constants/actionTypes';
 import { createHeaders } from '../utils/requestUtils';
 
+const getTodoListsPending = () => {
+  return {
+    type: actionTypes.GET_TODO_LISTS_PENDING,
+  }
+};
+
+const getTodoListsSuccess = (payload) => {
+  return {
+    type: actionTypes.GET_TODO_LISTS_SUCCESS,
+    payload,
+  }
+};
+
+const getTodoListsFailure = (payload) => {
+  return {
+    type: actionTypes.GET_TODO_LISTS_FAILURE,
+    payload,
+  }
+};
+
 const createTodoListPending = () => {
   return {
     type: actionTypes.CREATE_TODO_LIST_PENDING,
@@ -58,6 +78,22 @@ const markAllCompleteFailure = (payload) => {
   return {
     type: actionTypes.MARK_ALL_COMPLETE_FAILURE,
     payload,
+  }
+};
+
+export const getTodoLists = (payload) => {
+  return (dispatch) => {
+    dispatch(getTodoListsPending());
+    const url = `${process.env.API_URL}/api/list`;
+    const options = {
+      method: 'GET',
+      headers: createHeaders(),
+      body: JSON.stringify(payload),
+    };
+    return fetch(url, options)
+      .then(response => response.json())
+      .then(json => dispatch(getTodoListsSuccess(json)))
+      .catch(error => dispatch(getTodoListsFailure({ error })));
   }
 };
 

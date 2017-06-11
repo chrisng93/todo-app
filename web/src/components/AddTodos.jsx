@@ -5,7 +5,7 @@ import * as actions from '../actions';
 import { currentTodoListSelector } from '../selectors/todoSelectors';
 
 const propTypes = {
-  currentTodoList: T.object.isRequired,
+  currentTodoList: T.object,
 
   addTodo: T.func,
 };
@@ -40,7 +40,7 @@ class AddTodos extends Component {
     return (
       <form className="addtodos">
         <input placeholder="What needs to be done?" value={todo} onChange={(e) => this.onChangeInput(e.target.value)} />
-        <button onClick={this.onAddTodo} disabled={!currentTodoList.hasOwnProperty('id')}>Add Todo</button>
+        <button onClick={this.onAddTodo} disabled={currentTodoList && !currentTodoList.hasOwnProperty('id')}>Add Todo</button>
       </form>
     );
   }

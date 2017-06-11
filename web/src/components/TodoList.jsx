@@ -26,7 +26,7 @@ class TodoList extends Component {
     const { currentTodoList } = this.props;
     return (
       <div className="todolist">
-        {currentTodoList.todos ?
+        {currentTodoList && currentTodoList.todos ?
           currentTodoList.todos.map(todo =>
             <Todo
               key={todo.id}
