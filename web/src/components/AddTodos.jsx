@@ -28,15 +28,19 @@ class AddTodos extends Component {
     const { addTodo, currentTodoList } = this.props;
     const { todo } = this.state;
     e.preventDefault();
-    addTodo({ description: todo, list_id: currentTodoList.id });
+    if (todo) {
+      addTodo({ description: todo, list_id: currentTodoList.id });
+      this.setState({ todo: '' });
+    }
   }
 
   render() {
+    const { currentTodoList } = this.props;
     const { todo } = this.state;
     return (
       <form className="addtodos">
         <input placeholder="What needs to be done?" value={todo} onChange={(e) => this.onChangeInput(e.target.value)} />
-        <button onClick={this.onAddTodo}>Add Todo</button>
+        <button onClick={this.onAddTodo} disabled={!currentTodoList.hasOwnProperty('id')}>Add Todo</button>
       </form>
     );
   }

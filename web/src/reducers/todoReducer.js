@@ -11,12 +11,14 @@ const initialState = {
   isCreatingTodoList: false, // is in the middle of an API call to create todo list
   isDeletingTodoList: false, // is in the middle of an API call to delete todo list
   isAddingTodo: false, // is in the middle of an API call to add todo
+  isTogglingTodo: false, // is in the middle of an API call to toggle todo
   error: initialError, // error state
 };
 
 export default function todoReducer(state = initialState, action) {
   const { type, payload } = action;
   const todoLists = { ...state.todoLists };
+  const currentTodoList = { ...state.currentTodoList };
   switch (type) {
     case actionTypes.CREATE_TODO_LIST_PENDING:
       return {
@@ -70,7 +72,6 @@ export default function todoReducer(state = initialState, action) {
         isAddingTodo: true,
       };
     case actionTypes.ADD_TODO_SUCCESS:
-      const currentTodoList = { ...state.currentTodoList };
       currentTodoList.todos.push(payload.todo);
       todoLists[currentTodoList.id] = currentTodoList;
       return {
@@ -84,6 +85,32 @@ export default function todoReducer(state = initialState, action) {
       return {
         ...state,
         isAddingTodo: false,
+        error: { status: true, message: payload.error },
+      };
+
+    case actionTypes.TOGGLE_TODO_PENDING:
+      return {
+        ...state,
+        isTogglingTodo: true,
+      };
+    case actionTypes.TOGGLE_TODO_SUCCESS:
+      for (let i = 0; i < currentTodoList.todos.length; i++) {
+        if (currentTodoList.todos[i].id === payload.todo.id) {
+          currentTodoList.todos[i] = payload.todo;
+        }
+      }
+      todoLists[currentTodoList.id] = currentTodoList;
+      return {
+        ...state,
+        todoLists,
+        currentTodoList,
+        isTogglingTodo: false,
+        error: initialError,
+      };
+    case actionTypes.TOGGLE_TODO_FAILURE:
+      return {
+        ...state,
+        isTogglingTodo: false,
         error: { status: true, message: payload.error },
       };
 

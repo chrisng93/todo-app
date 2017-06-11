@@ -27,6 +27,11 @@ export const isAddingTodoSelector = createSelector(
   todoState => todoState.isAddingTodo
 );
 
+export const isTogglingTodoSelector = createSelector(
+  todoStateSelector,
+  todoState => todoState.isTogglingTodo
+);
+
 export const todoErrorSelector = createSelector(
   todoStateSelector,
   todoState => todoState.error

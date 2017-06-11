@@ -64,7 +64,7 @@ export const toggleTodo = (payload) => {
     const options = {
       method: 'PUT',
       headers: createHeaders(),
-      body: JSON.stringify({ is_completed: !payload.isCompleted }),
+      body: JSON.stringify({ is_completed: payload.isCompleted }),
     };
     return fetch(url, options)
       .then(response => response.json())
