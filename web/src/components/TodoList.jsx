@@ -26,13 +26,15 @@ class TodoList extends Component {
     const { currentTodoList } = this.props;
     return (
       <div className="todolist">
-        {currentTodoList.todos.map(todo =>
-          <Todo
-            key={todo.id}
-            todo={todo}
-            completeTodo={this.onCompleteTodo}
-          />
-        )}
+        {currentTodoList.todos ?
+          currentTodoList.todos.map(todo =>
+            <Todo
+              key={todo.id}
+              todo={todo}
+              completeTodo={this.onCompleteTodo}
+            />
+          ) :
+          null}
       </div>
     );
   }

@@ -5,20 +5,9 @@ const initialError = {
   message: '',
 };
 
-const todoListsMock = {
-  test1: {id: 1, name: 'test1', todos: []},
-  test2: {id: 2, name: 'test2', todos: []},
-};
-
-const currentTodoMock = {
-  id: 1,
-  name: 'test1',
-  todos: [],
-};
-
 const initialState = {
-  todoLists: todoListsMock, // object of todo lists w/ key being the list name
-  currentTodoList: currentTodoMock, // current/selected todo list w/ name and todos keys
+  todoLists: {}, // object of todo lists w/ key being the list name
+  currentTodoList: {}, // current/selected todo list w/ name and todos keys
   isCreatingTodoList: false, // is in the middle of an API call to create todo list
   isDeletingTodoList: false, // is in the middle of an API call to delete todo list
   isAddingTodo: false, // is in the middle of an API call to add todo
@@ -27,20 +16,47 @@ const initialState = {
 
 export default function todoReducer(state = initialState, action) {
   const { type, payload } = action;
+  const todoLists = { ...state.todoLists };
   switch (type) {
     case actionTypes.CREATE_TODO_LIST_PENDING:
-      return state;
+      return {
+        ...state,
+        isCreatingTodoList: true,
+      };
     case actionTypes.CREATE_TODO_LIST_SUCCESS:
-      return state;
+      todoLists[payload.list.id] = payload.list;
+      return {
+        ...state,
+        todoLists,
+        isCreatingTodoList: false,
+        error: initialError,
+      };
     case actionTypes.CREATE_TODO_LIST_FAILURE:
-      return state;
+      return {
+        ...state,
+        isCreatingTodoList: false,
+        error: { status: true, message: payload.error },
+      };
 
     case actionTypes.DELETE_TODO_LIST_PENDING:
-      return state;
+      return {
+        ...state,
+        isDeletingTodoList: true,
+      };
     case actionTypes.DELETE_TODO_LIST_SUCCESS:
-      return state;
+      delete todoLists[payload.id];
+      return {
+        ...state,
+        todoLists,
+        isDeletingTodoList: false,
+        error: initialError,
+      };
     case actionTypes.DELETE_TODO_LIST_FAILURE:
-      return state;
+      return {
+        ...state,
+        isDeletingTodoList: false,
+        error: { status: true, message: payload.error },
+      };
 
     case actionTypes.SELECT_TODO_LIST:
       return {

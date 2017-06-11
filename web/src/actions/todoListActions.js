@@ -1,4 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
+import { createHeaders } from '../utils/requestUtils';
 
 const createTodoListPending = () => {
   return {
@@ -13,10 +14,10 @@ const createTodoListSuccess = (payload) => {
   }
 };
 
-const createTodoListFailure = (payload) => {
+const createTodoListFailure = (error) => {
   return {
     type: actionTypes.CREATE_TODO_LIST_FAILURE,
-    payload,
+    error,
   }
 };
 
@@ -33,22 +34,40 @@ const deleteTodoListSuccess = (payload) => {
   }
 };
 
-const deleteTodoListFailure = (payload) => {
+const deleteTodoListFailure = (error) => {
   return {
     type: actionTypes.DELETE_TODO_LIST_FAILURE,
-    payload,
+    error,
   }
 };
 
 export const createTodoList = (payload) => {
   return (dispatch) => {
-
+    const url = `${process.env.API_URL}/api/list`;
+    const options = {
+      method: 'POST',
+      headers: createHeaders(),
+      body: JSON.stringify({
+        name: payload.name,
+      }),
+    };
+    return fetch(url, options)
+      .then(response => response.json())
+      .then(payload => dispatch(createTodoListSuccess(payload)))
+      .catch(error => dispatch(createTodoListFailure(error)));
   }
 };
 
 export const deleteTodoList = (payload) => {
   return (dispatch) => {
-
+    const url = `${process.env.API_URL}/api/list/${payload.id}`;
+    const options = {
+      method: 'DELETE',
+      headers: createHeaders(),
+    };
+    return fetch(url, options)
+      .then(response => dispatch(deleteTodoListSuccess({ id: payload.id })))
+      .catch(error => dispatch(deleteTodoListFailure(error)));
   }
 };
 
