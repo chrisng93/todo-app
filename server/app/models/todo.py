@@ -22,3 +22,7 @@ class Todo(db.Model):
         if 'list_id' in json:
             self.list_id = json['list_id']
         return self
+
+    def mark_complete(self):
+        self.is_completed = True
+        return self

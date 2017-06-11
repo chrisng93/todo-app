@@ -48,3 +48,12 @@ def delete_list(id):
     db.session.delete(todo_list)
     db.session.commit()
     return jsonify({})
+
+
+@list_api.route('/<int:id>/complete', methods=['PUT'])
+def mark_all_complete(id):
+    todo_list = List.query.get_or_404(id)
+    todo_list.mark_all_complete()
+    db.session.add(todo_list)
+    db.session.commit()
+    return jsonify({'list': todo_list.to_json()})

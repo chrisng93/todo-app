@@ -19,3 +19,8 @@ class List(db.Model):
         if 'name' in json:
             self.name = json['name']
         return self
+
+    def mark_all_complete(self):
+        for todo in self.todos:
+            todo.mark_complete()
+        return self
