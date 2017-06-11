@@ -44,7 +44,7 @@
   $ python manage.py createdb
   ```
 
-#### 5. Run the application. In a new terminal window, run the following command to start the application:
+#### 5. Run the application. From within the server directory, run the following command to start the application:
 
   ```sh
   $ python manage.py runserver
