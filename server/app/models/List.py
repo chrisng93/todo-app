@@ -13,8 +13,6 @@ class List(db.Model):
     def to_json(self):
         json = {c.name: getattr(self, c.name) for c in self.__table__.columns}
         json['todos'] = [todo.to_json() for todo in sorted(self.todos, key=lambda t:t.created_at)]
-        for todo in json['todos']:
-            print(todo['created_at'])
         return json
 
     def from_json(self, json):

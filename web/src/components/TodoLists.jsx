@@ -78,7 +78,7 @@ class TodoLists extends Component {
         </div>
         <form className="todolists-add">
           <input placeholder="What do you want to name this list?" value={newList} onChange={(e) => this.onChangeInput(e.target.value)} />
-          <button onClick={(e) => this.onCreateTodoList(e)}>Create</button>
+          <button onClick={(e) => this.onCreateTodoList(e)}>Create List</button>
         </form>
       </div>
     );

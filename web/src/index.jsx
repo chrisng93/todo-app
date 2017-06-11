@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import App from './components/App';
 
 const store = configureStore();
-// persistStore(store);
+persistStore(store);
 
 // import stylesheets
 require ('./stylesheets/app.scss');
