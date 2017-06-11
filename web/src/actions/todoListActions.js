@@ -14,10 +14,10 @@ const createTodoListSuccess = (payload) => {
   }
 };
 
-const createTodoListFailure = (error) => {
+const createTodoListFailure = (payload) => {
   return {
     type: actionTypes.CREATE_TODO_LIST_FAILURE,
-    error,
+    payload,
   }
 };
 
@@ -34,32 +34,32 @@ const deleteTodoListSuccess = (payload) => {
   }
 };
 
-const deleteTodoListFailure = (error) => {
+const deleteTodoListFailure = (payload) => {
   return {
     type: actionTypes.DELETE_TODO_LIST_FAILURE,
-    error,
+    payload,
   }
 };
 
 export const createTodoList = (payload) => {
   return (dispatch) => {
+    dispatch(createTodoListPending());
     const url = `${process.env.API_URL}/api/list`;
     const options = {
       method: 'POST',
       headers: createHeaders(),
-      body: JSON.stringify({
-        name: payload.name,
-      }),
+      body: JSON.stringify(payload),
     };
     return fetch(url, options)
       .then(response => response.json())
-      .then(payload => dispatch(createTodoListSuccess(payload)))
-      .catch(error => dispatch(createTodoListFailure(error)));
+      .then(json => dispatch(createTodoListSuccess(json)))
+      .catch(error => dispatch(createTodoListFailure({ error })));
   }
 };
 
 export const deleteTodoList = (payload) => {
   return (dispatch) => {
+    dispatch(deleteTodoListPending());
     const url = `${process.env.API_URL}/api/list/${payload.id}`;
     const options = {
       method: 'DELETE',
@@ -67,7 +67,7 @@ export const deleteTodoList = (payload) => {
     };
     return fetch(url, options)
       .then(response => dispatch(deleteTodoListSuccess({ id: payload.id })))
-      .catch(error => dispatch(deleteTodoListFailure(error)));
+      .catch(error => dispatch(deleteTodoListFailure({ error })));
   }
 };
 

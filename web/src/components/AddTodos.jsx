@@ -28,7 +28,7 @@ class AddTodos extends Component {
     const { addTodo, currentTodoList } = this.props;
     const { todo } = this.state;
     e.preventDefault();
-    addTodo({ todo, list_id: currentTodoList.id });
+    addTodo({ description: todo, list_id: currentTodoList.id });
   }
 
   render() {

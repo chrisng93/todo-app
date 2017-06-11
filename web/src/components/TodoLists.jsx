@@ -5,7 +5,7 @@ import * as actions from '../actions';
 import { todoListsSelector } from '../selectors/todoSelectors';
 
 const propTypes = {
-  todoLists: T.object.isRequired,
+  todoLists: T.array.isRequired,
 
   createTodoList: T.func,
   deleteTodoList: T.func,
@@ -30,7 +30,7 @@ class TodoLists extends Component {
 
   selectTodoList(id) {
     const { selectTodoList } = this.props;
-    selectTodoList(id);
+    selectTodoList({ id });
     this.setState({ selectedTodoList: id });
   }
 

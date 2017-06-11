@@ -1,4 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
+import { createHeaders } from '../utils/requestUtils';
 
 const addTodoPending = () => {
   return {
@@ -20,34 +21,54 @@ const addTodoFailure = (payload) => {
   }
 };
 
-const completeTodoPending = () => {
+const toggleTodoPending = () => {
   return {
-    type: actionTypes.COMPLETE_TODO_PENDING,
+    type: actionTypes.TOGGLE_TODO_PENDING,
   }
 };
 
-const completeTodoSuccess = (payload) => {
+const toggleTodoSuccess = (payload) => {
   return {
-    type: actionTypes.COMPLETE_TODO_SUCCESS,
+    type: actionTypes.TOGGLE_TODO_SUCCESS,
     payload,
   }
 };
 
-const completeTodoFailure = (payload) => {
+const toggleTodoFailure = (payload) => {
   return {
-    type: actionTypes.COMPLETE_TODO_FAILURE,
+    type: actionTypes.TOGGLE_TODO_FAILURE,
     payload,
   }
 };
 
 export const addTodo = (payload) => {
   return (dispatch) => {
-
+    dispatch(addTodoPending());
+    const url = `${process.env.API_URL}/api/todo`;
+    const options = {
+      method: 'POST',
+      headers: createHeaders(),
+      body: JSON.stringify(payload),
+    };
+    return fetch(url, options)
+      .then(response => response.json())
+      .then(json => dispatch(addTodoSuccess(json)))
+      .catch(error => dispatch(addTodoFailure({ error })));
   }
 };
 
-export const completeTodo = (payload) => {
+export const toggleTodo = (payload) => {
   return (dispatch) => {
-
+    dispatch(toggleTodoPending());
+    const url = `${process.env.API_URL}/api/todo/${payload.id}`;
+    const options = {
+      method: 'PUT',
+      headers: createHeaders(),
+      body: JSON.stringify({ is_completed: !payload.isCompleted }),
+    };
+    return fetch(url, options)
+      .then(response => response.json())
+      .then(json => dispatch(toggleTodoSuccess(json)))
+      .catch(error => dispatch(toggleTodoFailure({ error })));
   }
 };

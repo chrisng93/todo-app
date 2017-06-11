@@ -8,18 +8,18 @@ import Todo from './Todo';
 const propTypes = {
   currentTodoList: T.object.isRequired,
 
-  completeTodo: T.func,
+  toggleTodo: T.func,
 };
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.onCompleteTodo = this.onCompleteTodo.bind(this);
+    this.onToggleTodo = this.onToggleTodo.bind(this);
   }
 
-  onCompleteTodo(todoId) {
-    const { completeTodo } = this.props;
-    completeTodo({ id: todoId });
+  onToggleTodo(id, isCompleted) {
+    const { toggleTodo } = this.props;
+    toggleTodo({ id, isCompleted: !isCompleted });
   }
 
   render() {
@@ -31,7 +31,7 @@ class TodoList extends Component {
             <Todo
               key={todo.id}
               todo={todo}
-              completeTodo={this.onCompleteTodo}
+              toggleTodo={this.onToggleTodo}
             />
           ) :
           null}
@@ -48,7 +48,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    completeTodo: bindActionCreators(actions.completeTodo, dispatch),
+    toggleTodo: bindActionCreators(actions.toggleTodo, dispatch),
   };
 };
 

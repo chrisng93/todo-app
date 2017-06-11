@@ -65,11 +65,27 @@ export default function todoReducer(state = initialState, action) {
       };
 
     case actionTypes.ADD_TODO_PENDING:
-      return state;
+      return {
+        ...state,
+        isAddingTodo: true,
+      };
     case actionTypes.ADD_TODO_SUCCESS:
-      return state;
+      const currentTodoList = { ...state.currentTodoList };
+      currentTodoList.todos.push(payload.todo);
+      todoLists[currentTodoList.id] = currentTodoList;
+      return {
+        ...state,
+        todoLists,
+        currentTodoList,
+        isAddingTodo: false,
+        error: initialError,
+      };
     case actionTypes.ADD_TODO_FAILURE:
-      return state;
+      return {
+        ...state,
+        isAddingTodo: false,
+        error: { status: true, message: payload.error },
+      };
 
     default:
       return state;
