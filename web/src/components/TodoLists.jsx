@@ -59,28 +59,28 @@ class TodoLists extends Component {
       <div className="todolists">
         <div className="todolists-lists">
           {todoLists.map(todoList =>
-            <span
+            <div
               key={todoList.id}
               className={`todolists-lists-list ${selectedTodoList === todoList.id ? 'selected' : null}`}
             >
-              <span
+              <div
                 className="todolists-lists-list-name"
                 onClick={() => this.selectTodoList(todoList.id)}
               >
                 {todoList.name}
-              </span>
+              </div>
               <button
                 className="todolists-lists-list-delete"
                 onClick={(e) => this.onDeleteTodoList(e, todoList.id)}
               >
                 x
               </button>
-            </span>
+            </div>
           )}
         </div>
         <form className="todolists-add">
-          <input value={newList} onChange={(e) => this.onChangeInput(e.target.value)} />
-          <button onClick={(e) => this.onCreateTodoList(e)}>Create todo list</button>
+          <input placeholder="What do you want to name this list?" value={newList} onChange={(e) => this.onChangeInput(e.target.value)} />
+          <button onClick={(e) => this.onCreateTodoList(e)}>Create</button>
         </form>
       </div>
     );

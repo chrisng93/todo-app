@@ -1,27 +1,53 @@
 .todolists {
-  .todolists-lists {
-    .todolists-lists-list {
-      .todolists-lists-list-name {
+  height: 80px;
+  width: 100%;
+  border-bottom: 2px dotted #E6E6E6;
+  display: flex;
+  flex-direction: column;
 
-      }
+  .todolists-lists {
+    height: 30px;
+    width: calc(100% - 16px);
+    margin: 0 8px;
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+
+    .todolists-lists-list {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex: 1;
 
       .todolists-lists-list-delete {
-
+        height: 14px;
+        width: 14px;
+        left: 4px;
+        padding: 0;
+        position: relative;
+        font-size: 10px;
       }
     }
 
     .selected {
-
+      font-weight: bold;
+      font-size: 18px;
     }
   }
 
   .todolists-add {
-    input {
+    height: 30px;
+    max-width: 100%;
+    margin: 4px 12px;
+    display: flex;
 
+    input {
+      margin-right: 8px;
+      flex: 1;
     }
 
     button {
-
+      width: 80px;
     }
   }
 }

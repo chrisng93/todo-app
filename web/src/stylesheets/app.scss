@@ -38,4 +38,38 @@ body {
     text-align: center;
     color: #3C3C3C;
   }
+
+  input {
+    border: 1px solid #B9B8B8;
+    border-radius: 4px;
+    padding: 8px;
+  }
+
+  input::-webkit-input-placeholder {
+    color: #A1A1A1;
+  }
+   
+  input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #A1A1A1;
+  }
+   
+  input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #A1A1A1;
+  }
+
+  input:-ms-input-placeholder {
+    color: #A1A1A1;
+  }
+
+  button {
+    border: 1px solid #B9B8B8;
+    border-radius: 4px;
+    background-image: linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
+    background-image: -o-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
+    background-image: -moz-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
+    background-image: -webkit-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
+    background-image: -ms-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
+  }
 }
