@@ -1,3 +1,3 @@
 from flask import Blueprint
-
-api = Blueprint('api', __name__)
+from .todos import todo_api
+from .lists import list_api
