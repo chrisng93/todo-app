@@ -3,11 +3,10 @@
 
 ## Table of Contents
 
-1. [Getting started](#Getting-Started)
   1. [Set up virtual environment](#Setup-Virtual-Environment)
   2. [Install dependencies](#Install-Dependencies)
-  3. [Install and run databases](#Install-Run-Databases)
-  4. [Run Alembic script to set up database](#Run-Alembic-Script)
+  3. [Create config file](#Create-Config)
+  4. [Create database](#Create-Database)
   5. [Run the application](#Run-Application)
 
 
@@ -39,7 +38,7 @@
 
 #### 3. Using the config.example.py file as a guide, create your own config.py file
 
-#### 3. From within the server directory, run the following command to create your database
+#### 4. From within the server directory, run the following command to create your database
 
   ```sh
   $ python manage.py createdb
