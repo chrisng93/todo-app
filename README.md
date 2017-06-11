@@ -39,19 +39,4 @@ Simple todo application
 
 ##### Back End:
 - Flask
-- Express
-- PostgreSQL
-- Sequelize
-- Redis
-- Cheerio
-- Cron
-
-#### Deployment:
-- Docker
-- Digital Ocean
-
-#### File Hosting:
-- Amazon S3
-
-#### APIs:
-- Reddit
+- SQLAlchemy
