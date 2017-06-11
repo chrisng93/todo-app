@@ -3,7 +3,7 @@ from ..models.Todo import Todo
 from ..extensions import db
 
 
-todo_api = Blueprint('todo', __name__, url_prefix='/api/todo/')
+todo_api = Blueprint('todo', __name__, url_prefix='/api/todo')
 
 
 @todo_api.route('/', methods=['GET'])
@@ -33,3 +33,11 @@ def update_todo(id):
     db.session.add(todo)
     db.session.commit()
     return jsonify({'todo': todo.to_json()})
+
+
+@todo_api.route('/<int:id>', methods=['DELETE'])
+def delete_list(id):
+    todo = Todo.query.get_or_404(id)
+    db.session.delete(todo)
+    db.session.commit()
+    return jsonify({})

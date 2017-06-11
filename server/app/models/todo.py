@@ -9,7 +9,7 @@ class Todo(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow())
     description = db.Column(db.String(200), nullable=False)
     is_completed = db.Column(db.Boolean, default=False)
-    list_id = db.Column(db.Integer, db.ForeignKey('lists.id'))
+    list_id = db.Column(db.Integer, db.ForeignKey('lists.id'), nullable=False)
 
     def to_json(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -19,4 +19,6 @@ class Todo(db.Model):
             self.description = json['description']
         if 'is_completed' in json:
             self.is_completed = json['is_completed']
+        if 'list_id' in json:
+            self.list_id = json['list_id']
         return self

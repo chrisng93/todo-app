@@ -39,4 +39,5 @@ def update_list(id):
 def delete_list(id):
     todo_list = List.query.get_or_404(id)
     db.session.delete(todo_list)
+    db.session.commit()
     return jsonify({})
