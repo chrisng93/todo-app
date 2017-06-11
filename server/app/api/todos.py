@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from sqlalchemy.exc import IntegrityError
 from ..models.Todo import Todo
 from ..extensions import db
 
@@ -20,19 +21,25 @@ def get_todo(id):
 
 @todo_api.route('/', methods=['POST'])
 def create_todo():
-    todo = Todo().from_json(request.json)
-    db.session.add(todo)
-    db.session.commit()
-    return jsonify({'todo': todo.to_json()}), 201
+    try:
+        todo = Todo().from_json(request.json)
+        db.session.add(todo)
+        db.session.commit()
+        return jsonify({'todo': todo.to_json()}), 201
+    except IntegrityError as e:
+        return jsonify({'message': str(e)}), 400
 
 
 @todo_api.route('/<int:id>', methods=['PUT'])
 def update_todo(id):
-    todo = Todo.query.get_or_404(id)
-    todo.from_json(request.json)
-    db.session.add(todo)
-    db.session.commit()
-    return jsonify({'todo': todo.to_json()})
+    try:
+        todo = Todo.query.get_or_404(id)
+        todo.from_json(request.json)
+        db.session.add(todo)
+        db.session.commit()
+        return jsonify({'todo': todo.to_json()})
+    except IntegrityError as e:
+        return jsonify({'message': str(e)}), 400
 
 
 @todo_api.route('/<int:id>', methods=['DELETE'])
