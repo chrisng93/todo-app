@@ -17,8 +17,8 @@ const initialState = {
 
 export default function todoReducer(state = initialState, action) {
   const { type, payload } = action;
-  const todoLists = { ...state.todoLists };
-  const currentTodoList = { ...state.currentTodoList };
+  let todoLists = { ...state.todoLists };
+  let currentTodoList = { ...state.currentTodoList };
   switch (type) {
     case actionTypes.CREATE_TODO_LIST_PENDING:
       return {
@@ -47,9 +47,13 @@ export default function todoReducer(state = initialState, action) {
       };
     case actionTypes.DELETE_TODO_LIST_SUCCESS:
       delete todoLists[payload.id];
+      if (payload.id === currentTodoList.id) {
+        currentTodoList = {};
+      }
       return {
         ...state,
         todoLists,
+        currentTodoList,
         isDeletingTodoList: false,
         error: initialError,
       };
