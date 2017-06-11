@@ -1,5 +1,5 @@
 module.exports = {
-  HOST: '',
-  PORT: '',
-  API_URL: '',
+  HOST: 'http://localhost',
+  PORT: '8000',
+  API_URL: 'http://localhost:5000',
 };
