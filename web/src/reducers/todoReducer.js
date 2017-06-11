@@ -12,6 +12,7 @@ const initialState = {
   isDeletingTodoList: false, // is in the middle of an API call to delete todo list
   isAddingTodo: false, // is in the middle of an API call to add todo
   isTogglingTodo: false, // is in the middle of an API call to toggle todo
+  isMarkingAllComplete: false, // is in the middle of an API call to mark all todos complete
   error: initialError, // error state
 };
 
@@ -115,6 +116,28 @@ export default function todoReducer(state = initialState, action) {
       return {
         ...state,
         isTogglingTodo: false,
+        error: { status: true, message: payload.error },
+      };
+
+    case actionTypes.MARK_ALL_COMPLETE_PENDING:
+      return {
+        ...state,
+        isMarkingAllComplete: true,
+      };
+    case actionTypes.MARK_ALL_COMPLETE_SUCCESS:
+      currentTodoList = payload.list;
+      todoLists[currentTodoList.id] = currentTodoList;
+      return {
+        ...state,
+        todoLists,
+        currentTodoList,
+        isMarkingAllComplete: false,
+        error: initialError,
+      };
+    case actionTypes.MARK_ALL_COMPLETE_FAILURE:
+      return {
+        ...state,
+        isMarkingAllComplete: false,
         error: { status: true, message: payload.error },
       };
 

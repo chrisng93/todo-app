@@ -41,6 +41,26 @@ const deleteTodoListFailure = (payload) => {
   }
 };
 
+const markAllCompletePending = () => {
+  return {
+    type: actionTypes.MARK_ALL_COMPLETE_PENDING,
+  }
+};
+
+const markAllCompleteSuccess = (payload) => {
+  return {
+    type: actionTypes.MARK_ALL_COMPLETE_SUCCESS,
+    payload,
+  }
+};
+
+const markAllCompleteFailure = (payload) => {
+  return {
+    type: actionTypes.MARK_ALL_COMPLETE_FAILURE,
+    payload,
+  }
+};
+
 export const createTodoList = (payload) => {
   return (dispatch) => {
     dispatch(createTodoListPending());
@@ -76,4 +96,19 @@ export const selectTodoList = (payload) => {
     type: actionTypes.SELECT_TODO_LIST,
     payload,
   })
+};
+
+export const markAllComplete = (payload) => {
+  return (dispatch) => {
+    dispatch(markAllCompletePending());
+    const url = `${process.env.API_URL}/api/list/${payload.id}/complete`;
+    const options = {
+      method: 'PUT',
+      headers: createHeaders(),
+    };
+    return fetch(url, options)
+      .then(response => response.json())
+      .then(json => dispatch(markAllCompleteSuccess(json)))
+      .catch(error => dispatch(markAllCompleteFailure({ error })));
+  }
 };

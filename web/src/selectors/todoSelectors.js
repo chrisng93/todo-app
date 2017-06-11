@@ -12,6 +12,22 @@ export const currentTodoListSelector = createSelector(
   todoState => todoState.currentTodoList
 );
 
+export const currentRemainingSelector = createSelector(
+  todoStateSelector,
+  todoState => {
+    if (todoState.currentTodoList.todos) {
+      const done = todoState.currentTodoList.todos.reduce((doneAccumulated, todo) => {
+        if (todo.is_completed) {
+          return doneAccumulated + 1;
+        }
+        return doneAccumulated;
+      }, 0);
+      return todoState.currentTodoList.todos.length - done;
+    }
+    return 0;
+  }
+);
+
 export const isCreatingTodoListSelector = createSelector(
   todoStateSelector,
   todoState => todoState.isCreatingTodoList
@@ -30,6 +46,11 @@ export const isAddingTodoSelector = createSelector(
 export const isTogglingTodoSelector = createSelector(
   todoStateSelector,
   todoState => todoState.isTogglingTodo
+);
+
+export const isMarkingAllCompleteSelector = createSelector(
+  todoStateSelector,
+  todoState => todoState.isMarkingAllComplete
 );
 
 export const todoErrorSelector = createSelector(

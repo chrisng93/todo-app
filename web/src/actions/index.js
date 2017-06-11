@@ -1,7 +1,7 @@
 /**
  * All action names should be defined here
  */
-import { createTodoList, deleteTodoList, selectTodoList } from './todoListActions';
+import { createTodoList, deleteTodoList, selectTodoList, markAllComplete } from './todoListActions';
 import { addTodo, toggleTodo } from './todoActions';
 
 module.exports = {
@@ -9,6 +9,7 @@ module.exports = {
   createTodoList,
   deleteTodoList,
   selectTodoList,
+  markAllComplete,
 
   // todo actions
   addTodo,

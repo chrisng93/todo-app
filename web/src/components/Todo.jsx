@@ -12,7 +12,7 @@ export default function Todo({ todo, toggleTodo }) {
       <input
         type="checkbox"
         checked={todo.is_completed}
-        onClick={() => toggleTodo(todo.id, todo.is_completed )}
+        onChange={() => toggleTodo(todo.id, todo.is_completed )}
       />
       <span className="todo-description">{todo.description}</span>
     </div>
