@@ -1,9 +1,15 @@
 .addtodos {
-  input {
+  height: 30px;
+  width: calc(100% - 24px);
+  margin: 16px 12px;
+  display: flex;
 
+  input {
+    margin-right: 8px;
+    flex: 1;
   }
 
   button {
-
+    width: 80px;
   }
 }
