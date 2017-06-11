@@ -1,0 +1,22 @@
+.footer {
+  height: 40px;
+  width: 100%;
+  border-top: 2px dotted #E6E6E6;
+  display: flex;
+
+  .footer-itemsleft {
+    margin: auto auto auto 12px;
+    font-size: 10px;
+    color: #A1A1A1;
+  }
+
+  .footer-markallcomplete {
+    margin: auto 12px auto auto;
+    font-size: 10px;
+    color: #BAD2EA;
+  }
+
+  .footer-markallcomplete:hover {
+    cursor: pointer;
+  }
+}

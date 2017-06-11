@@ -29,9 +29,9 @@ class Footer extends Component {
         <div className="footer-itemsleft">
           {currentRemaining} items left
         </div>
-        <button className="footer-markallcomplete" onClick={this.onMarkAllComplete}>
+        <a className="footer-markallcomplete" onClick={this.onMarkAllComplete}>
           Mark all as complete
-        </button>
+        </a>
       </div>
     );
   }

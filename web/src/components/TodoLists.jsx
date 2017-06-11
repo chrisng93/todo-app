@@ -15,13 +15,9 @@ const propTypes = {
 class TodoLists extends Component {
   constructor(props) {
     super(props);
-    let selectedTodoList = null;
-    if (props.todoLists[Object.keys(props.todoLists)[0]]) {
-      selectedTodoList = props.todoLists[Object.keys(props.todoLists)[0]].id;
-    }
     this.state = {
       newList: '',
-      selectedTodoList,
+      selectedTodoList: null,
     };
     this.selectTodoList = this.selectTodoList.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);

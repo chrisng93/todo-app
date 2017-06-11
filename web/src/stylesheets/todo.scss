@@ -1,9 +1,21 @@
 .todo {
-  input {
+  height: 40px;
+  width: 100%;
+  display: flex;
 
+  input {
+    height: 100%;
+    margin: auto 12px;
+  }
+
+  input[type="checkbox"]:focus {
+    background-color: #989898;
   }
 
   .todo-description {
-
+    height: 100%;
+    line-height: 40px;
+    font-size: 12px;
+    color: #989898;
   }
 }

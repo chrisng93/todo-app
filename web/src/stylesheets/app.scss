@@ -2,6 +2,7 @@
 @import 'addtodos';
 @import 'todolist';
 @import 'todo';
+@import 'footer';
 
 body {
   max-width: 100vw;
@@ -66,10 +67,15 @@ body {
   button {
     border: 1px solid #B9B8B8;
     border-radius: 4px;
+    font-size: 9px;
     background-image: linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
     background-image: -o-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
     background-image: -moz-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
     background-image: -webkit-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
     background-image: -ms-linear-gradient(bottom, #DFDEDE 50%, #ECEBEA 50%);
+  }
+
+  button:hover {
+    cursor: pointer;
   }
 }
