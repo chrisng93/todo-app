@@ -3,7 +3,6 @@
 
 ## Table of Contents
 
-1. [Getting started](#Getting-Started)
   1. [Install dependencies](#Install-Dependencies)
   2. [Run the application](#Run-Application)
 
