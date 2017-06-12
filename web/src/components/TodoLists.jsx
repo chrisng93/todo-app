@@ -2,10 +2,11 @@ import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as actions from '../actions';
-import { todoListsSelector } from '../selectors/todoSelectors';
+import { todoListsSelector, currentTodoListSelector } from '../selectors/todoSelectors';
 
 const propTypes = {
   todoLists: T.array.isRequired,
+  currentTodoList: T.object,
 
   createTodoList: T.func,
   deleteTodoList: T.func,
@@ -22,6 +23,12 @@ class TodoLists extends Component {
     this.selectTodoList = this.selectTodoList.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onCreateTodoList = this.onCreateTodoList.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentTodoList !== this.props.currentTodoList) {
+      this.setState({ selectedTodoList: nextProps.currentTodoList.id });
+    }
   }
 
   selectTodoList(id) {
@@ -88,6 +95,7 @@ class TodoLists extends Component {
 const mapStateToProps = (state) => {
   return {
     todoLists: todoListsSelector(state),
+    currentTodoList: currentTodoListSelector(state),
   };
 };
 
